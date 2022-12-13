@@ -13,7 +13,7 @@ public class Kundenverwaltung {
     public Kundenverwaltung() {}
 
 
-    public int prüfeAnmeldedaten(String bentzername, String pwd, String IP, int port) {return 0;}
+    public int anmelden(String bentzername, String pwd, String IP, int port) {return 0;}
     public int getUserID(String IP, int Port) {return 0;}
     public void setzeTipp(int UserID, int spielID, int tore1, int tore2) {}
     public int[] getTipp(int UserID, int SpielID) {return null;}
