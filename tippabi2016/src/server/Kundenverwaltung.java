@@ -19,4 +19,6 @@ public class Kundenverwaltung {
     public int[] getTipp(int UserID, int SpielID) {return null;}
     public void abmelden(int UserID) {}
     public void erstelleUser(String Username, String pwd) {}
+    public int save(String path) {return 0;}
+    public int load(String path) {return 0;}
 }
