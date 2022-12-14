@@ -330,15 +330,15 @@ private TippClient hatChatClient;
     }//GEN-LAST:event_punkteAbfragen
 
     private void tippPruefen(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tippPruefen
-        hatChatClient.send("SPIEL " + jTextField8);
+        hatChatClient.send("SPIEL " + jTextField8.getText());
     }//GEN-LAST:event_tippPruefen
 
     private void tippAbgeben(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tippAbgeben
-        hatChatClient.send("TIPP " + jTextField3 + " " + jTextField5 + " " + jTextField6);
+        hatChatClient.send("TIPP " + jTextField3.getText() + " " + jTextField5.getText() + " " + jTextField6.getText());
     }//GEN-LAST:event_tippAbgeben
 
     private void anmeldenAls(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anmeldenAls
-        hatChatClient.send("ANMELDEN " + jTextField1 + " " + jTextField2);
+        hatChatClient.send("ANMELDEN " + jTextField1.getText() + " " + jTextField2.getText());
     }//GEN-LAST:event_anmeldenAls
 
     /**
