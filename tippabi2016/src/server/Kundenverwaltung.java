@@ -82,4 +82,12 @@ public class Kundenverwaltung {
             userList.next();
         }
     }
+
+    public int save(String filePath) {
+        return 0;
+    }
+
+    public int load(String filePath) {
+        return 0;
+    }
 }
