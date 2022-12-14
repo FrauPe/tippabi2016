@@ -6,6 +6,7 @@ package server;
 
 import abiturklassen.netzklassen.*;
 import abiturklassen.listenklassen.List;
+import javax.swing.JFrame;
 
 /**
  *
@@ -14,10 +15,15 @@ import abiturklassen.listenklassen.List;
 public class Tippserver extends Server {
 
     Kundenverwaltung data;
+    javax.swing.JTextArea output;
+    String filePath;
 
-    public Tippserver() {
+    public Tippserver(javax.swing.JTextArea out, String pFilePath) {
         super(2000);
-        Kundenverwaltung data = new Kundenverwaltung();
+        data = new Kundenverwaltung();
+        data.load(pFilePath);
+        filePath = pFilePath;
+        output = out;
     }
 
     public void processNewConnection(String pClientIP, int pClientPort) {
@@ -25,7 +31,7 @@ public class Tippserver extends Server {
     }
 
     public void processMessage(String pClientIP, int pClientPort, String pMessage) {
-
+        output.append(pClientIP + ": " + String.valueOf(pClientPort) + "-> " + pMessage + "\n");
         String reply = "";
         int userID = data.getUserID(pClientIP, pClientPort);
         String[] command = pMessage.split(" ");
@@ -90,6 +96,7 @@ public class Tippserver extends Server {
             reply = "-ERR";
         }
         send(pClientIP, pClientPort, reply);
+        output.append("-> " + reply + "\n");
 
     }
 
@@ -98,6 +105,10 @@ public class Tippserver extends Server {
         if (userID != -1) {
             data.abmelden(userID);
         }
+    }
+
+    public int shutdown() {
+        return data.save(filePath);
     }
 
 }
