@@ -46,20 +46,12 @@ public class User {
         this.passwort = passwort;
     }
 
-    public static int getUserID() {
-        return nextUserID;
+    public int getUserID() {
+        return userID;
     }
 
-    public static void setUserID(int userID) {
-        User.nextUserID = userID;
-    }
-
-    public static int getNextUserID() {
-        return nextUserID;
-    }
-
-    public static void setNextUserID(int nextUserID) {
-        User.nextUserID = nextUserID;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getIP() {
@@ -83,6 +75,7 @@ public class User {
     }
 
     public void setSpieleTipps(int spielID, int tor1, int tor2) {
+        spielID--;
         spieleTipps[spielID][0] = tor1;
         spieleTipps[spielID][1] = tor2;
     }

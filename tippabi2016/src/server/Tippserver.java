@@ -24,6 +24,7 @@ public class Tippserver extends Server {
         data.load(pFilePath);
         filePath = pFilePath;
         output = out;
+        data.erstelleUser("Benutzername", "Passwort");
     }
 
     public void processNewConnection(String pClientIP, int pClientPort) {
@@ -33,13 +34,14 @@ public class Tippserver extends Server {
     public void processMessage(String pClientIP, int pClientPort, String pMessage) {
         output.append(pClientIP + ": " + String.valueOf(pClientPort) + "-> " + pMessage + "\n");
         String reply = "";
-        int userID = data.getUserID(pClientIP, pClientPort);
+        String croppedClientIP = pClientIP.substring(1);
+        int userID = data.getUserID(croppedClientIP, pClientPort);
         String[] command = pMessage.split(" ");
 
         try {
             switch (command[0]) {
                 case "ANMELDEN":
-                    int tmp = data.anmelden(command[1], command[2], pClientIP, pClientPort);
+                    int tmp = data.anmelden(command[1], command[2], croppedClientIP, pClientPort);
                     switch (tmp) {
                         case 0:
                             reply = "+OK " + command[1] + " ist angemeldet.";
@@ -54,6 +56,7 @@ public class Tippserver extends Server {
                             reply = "-ERR " + command[1] + " ist unbekannt.";
                             break;
                     }
+                    break;
                 case "TIPP":
                     if (userID == -1) {
                         reply = "-ERR Du bist nicht angemeldet";
@@ -64,6 +67,7 @@ public class Tippserver extends Server {
                         break;
                     }
                     data.setzeTipp(userID, Integer.valueOf(command[1]), Integer.valueOf(command[2]), Integer.valueOf(command[3]));
+                    reply = "+OK Der Tipp auf Spiel Nr. " + command[1] + " wurde gesetzt.";
                     break;
                 case "ABMELDEN":
                     if (userID == -1) {
@@ -71,12 +75,14 @@ public class Tippserver extends Server {
                         break;
                     }
                     data.abmelden(userID);
+                    reply = "+OK Du wurdest abgemeldet.";
+                    break;
                 case "SPIEL":
                     if (userID == -1) {
                         reply = "-ERR Du bist nicht angemeldet";
                         break;
                     }
-                    if (Integer.valueOf(command[1]) > 51 && Integer.valueOf(command[1]) <= 0) {
+                    if (Integer.valueOf(command[1]) > 51 || Integer.valueOf(command[1]) <= 0) {
                         reply = "-ERR Die Spiel Nr. " + command[1] + " ist ungültig.";
                         break;
                     }
@@ -85,7 +91,7 @@ public class Tippserver extends Server {
                         reply = "-ERR Kein Tipp für Spiel Nr. " + command[1] + " abgegeben.";
                         break;
                     }
-                    reply = "+OK Dein Tipp für Spiel " + command[1] + " " + tipp[0] + " " + tipp[1];
+                    reply = "+OK Dein Tipp für Spiel " + command[1] + ": " + tipp[0] + ":" + tipp[1];
                     break;
                 default:
                     reply = "-ERR Befehl ungültig.";
@@ -94,6 +100,7 @@ public class Tippserver extends Server {
             }
         } catch (Exception e) {
             reply = "-ERR";
+            output.append("SERVER ERROR while processing command: " + e.getMessage() + "\n");
         }
         send(pClientIP, pClientPort, reply);
         output.append("-> " + reply + "\n");
