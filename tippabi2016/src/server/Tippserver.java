@@ -5,9 +5,6 @@
 package server;
 
 import abiturklassen.netzklassen.*;
-import abiturklassen.listenklassen.List;
-import javax.swing.JFrame;
-
 /**
  *
  * @author q2.02Schaaf
