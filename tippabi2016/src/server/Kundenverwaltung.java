@@ -4,21 +4,30 @@
  */
 package server;
 
+import abiturklassen.listenklassen.List;
+
 /**
  *
  * @author q2.02Schaaf
  */
 public class Kundenverwaltung {
+    List<User> userList = new List<>();
 
-    public Kundenverwaltung() {}
-
-
-    public int anmelden(String bentzername, String pwd, String IP, int port) {return 0;}
-    public int getUserID(String IP, int Port) {return 0;}
-    public void setzeTipp(int UserID, int spielID, int tore1, int tore2) {}
-    public int[] getTipp(int UserID, int SpielID) {return null;}
-    public void abmelden(int UserID) {}
-    public void erstelleUser(String Username, String pwd) {}
-    public int save(String path) {return 0;}
-    public int load(String path) {return 0;}
+    public int anmelden(String benutzername, String passwort, String ip, int port) {
+        userList.toFirst();
+        while(userList.hasAccess()){
+            if(benutzername == userList.getContent().getBenutzername()){
+                if(passwort == userList.getContent().getPasswort()){
+                    if(userList.getContent().getIP() == null && userList.getContent().getPort() == 0) return 1;
+                    else return 2;}
+                else return 3;}                       
+            else return 4;}     
+        return 5;    
 }
+    
+    public void erstelleUser(String benutzername, String passwort){
+        userList.append(new User(benutzername, passwort));
+    }
+}
+
+
