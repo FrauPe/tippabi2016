@@ -5,7 +5,6 @@
 package gui;
 
 import client.TippClient;
-import com.sun.management.jmx.Trace;
 
 /**
  *
