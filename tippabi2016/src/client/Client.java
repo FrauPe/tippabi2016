@@ -4,7 +4,7 @@ package client;
 import javax.swing.*;
 import abiturklassen.netzklassen.*;
 
-public class ChatClient extends Client {
+public class Client extends Client {
 
   final String ENDE = "*bye*";
   JTextArea textbereich;
@@ -19,7 +19,7 @@ public class ChatClient extends Client {
        if (pMessage.equals(ENDE))
          this.close();
        else
-         textbereich.setText(textbereich.getText() + "\n" + pMessage);
+         textbereich.setText(textbereich.getText() + pMessage + "\n");
   }
   
   public void disconnect() {
