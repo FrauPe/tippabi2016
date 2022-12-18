@@ -87,6 +87,10 @@ public class Tippserver extends Server {
                     }
                     reply = "+OK Dein Tipp für Spiel " + command[1] + ": " + tipp[0] + ":" + tipp[1];
                     break;
+                case "SMMT":
+                    reply = "+OK Dieser Befehl wird bald unterstützt.";
+                    //Do real stuff here.
+                    break;    
                 default:
                     reply = "-ERR Befehl ungültig.";
                     break;
