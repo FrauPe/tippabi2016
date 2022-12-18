@@ -1,34 +1,31 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package server;
 
 import abiturklassen.netzklassen.*;
 /**
  *
  * @author q2.02Schaaf
+ * Kommentare FrauPe
  */
 public class Tippserver extends Server {
 
-    Kundenverwaltung data;
-    javax.swing.JTextArea output;
-    String filePath;
+    Kundenverwaltung data;//Ersetzt teilnehmersammlung, gut!
+    javax.swing.JTextArea output;//Vereinfacht Kommunikation mit GUI - siehe ChatClient-Anwendung, gut!
+    String filePath;//Noch nicht genutzt...ok!
 
     public Tippserver(javax.swing.JTextArea out, String pFilePath) {
         super(2000);
         data = new Kundenverwaltung();
-        data.load(pFilePath);
-        filePath = pFilePath;
+        data.load(pFilePath);//macht noch nix - ok!
+        filePath = pFilePath;//macht noch nix - ok!
         output = out;
-        data.erstelleUser("Benutzername", "Passwort");
+        data.erstelleUser("Benutzername", "Passwort");//interner Test, naja ok :-)
     }
 
     public void processNewConnection(String pClientIP, int pClientPort) {
-
+        
     }
 
-    public void processMessage(String pClientIP, int pClientPort, String pMessage) {
+    public void processMessage(String pClientIP, int pClientPort, String pMessage) { // Befehl Platz und Befehl Punkte muss noch realisiert werden
         output.append(pClientIP + ": " + String.valueOf(pClientPort) + "-> " + pMessage + "\n");
         String reply = "";
         String croppedClientIP = pClientIP.substring(1);
@@ -112,7 +109,7 @@ public class Tippserver extends Server {
     }
 
     public int shutdown() {
-        return data.save(filePath);
+        return data.save(filePath);//macht noch nix - ok!
     }
 
 }

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package server;
 
 import abiturklassen.listenklassen.List;
@@ -9,8 +5,9 @@ import abiturklassen.listenklassen.List;
 /**
  *
  * @author q2.02Schaaf
+ * Kommentare FrauPe
  */
-public class Kundenverwaltung {
+public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverklasse, gefällt mir so besser!
 
     List<User> userList = new List<>();
     
@@ -85,6 +82,9 @@ public class Kundenverwaltung {
         }
     }
 
+    /**
+     * Vermutlich für die User-Liste, sinnvoll, noch nicht umgesetzt... 
+     */
     public int save(String filePath) {
         return 0;
     }
