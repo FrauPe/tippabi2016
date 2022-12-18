@@ -1,24 +1,21 @@
 package server;
 
 import abiturklassen.listenklassen.List;
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 /**
  *
  * @author Q2.02Trell
+ * Kommentare Frau P
  */
-public class User {
+public class User { // aka Teilnehmer
 
     String benutzername;
     String passwort;
     static int nextUserID = 0;
     int userID;
-    String IP;
-    int port = 0;
-    int[][] spieleTipps = new int[51][2];
+    //Noch ein Attribut für die User-Punkte? vgl. Klasse Teilnehmer
+    String IP; // Statt Klasse Verbindungsdaten: sinnvoll, NULL bzw. veraltet, falls nicht verbunden...
+    int port = 0; // Statt Klasse Verbindungsdaten: sinnvoll, NULL bzw. veraltet, falls nicht verbunden...
+    int[][] spieleTipps = new int[51][2]; //Statt Klasse Tipp: sinnvoll!
 
     public User(String benutzername, String passwort) {
         this.benutzername = benutzername;
@@ -41,7 +38,7 @@ public class User {
     public String getPasswort() {
         return passwort;
     }
-
+    
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }
@@ -74,6 +71,13 @@ public class User {
         return spieleTipps;
     }
 
+    public int[] getSpielTipps(int pSpiel) {
+        pSpiel--;
+        if (pSpiel>=0 && pSpiel<=spieleTipps.length) return spieleTipps[pSpiel];
+        int[] notipp={-1,-1};
+        return notipp;
+    }
+    
     public void setSpieleTipps(int spielID, int tor1, int tor2) {
         spielID--;
         spieleTipps[spielID][0] = tor1;
