@@ -102,7 +102,7 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
     return maxtipps;
     }
 
-
+ 
     public int save(String filePath) {
         return 0;
     }
