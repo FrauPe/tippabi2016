@@ -87,9 +87,9 @@ public class Tippserver extends Server {
                     }
                     reply = "+OK Dein Tipp für Spiel " + command[1] + ": " + tipp[0] + ":" + tipp[1];
                     break;
-                case "SMMT":
-                    reply = "+OK Die Meisten Tipps wurden für Spiel " + data.getSMMT() + " abgegeben.";
-                    break;  
+//                case "SMMT":
+//                    reply = "+OK Die Meisten Tipps wurden für Spiel " + data.getSMMT() + " abgegeben.";
+//                    break;  
                 case "PUNKTE":
                     if (userID == -1) {
                         reply = "-ERR Du bist nicht angemeldet.";
@@ -102,6 +102,7 @@ public class Tippserver extends Server {
                         reply = "-ERR Du bist nicht angemeldet.";
                         break;
                     }
+                    reply = "+OK Du bist auf dem" + data.getPlatz(userID) + ". Platz.";
                     break;
                 default:
                     reply = "-ERR Befehl ungültig.";
@@ -127,5 +128,7 @@ public class Tippserver extends Server {
     public int shutdown() {
         return data.save(filePath);//macht noch nix - ok!
     }
+
+public void werteSpiele(int SpielNr)
 
 }

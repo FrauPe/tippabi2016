@@ -4,13 +4,24 @@ import abiturklassen.listenklassen.List;
 
 /**
  *
- * @author q2.02Schaaf
- * Kommentare FrauPe
+ * @author q2.02Schaaf Kommentare FrauPe
  */
 public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverklasse, gefällt mir so besser!
 
     List<User> userList = new List<>();
-    
+
+    final int[][] gameResults = {{2,1},{0,1},{2,1},{1,1},{0,1},
+                                 {1,0},{2,0},{1,0},{1,1},{0,2},
+                                 {0,2},{1,1},{1,2},{1,1},{2,0},
+                                 {2,1},{0,2},{0,0},{1,0},{2,2},
+                                 {3,0},{3,0},{1,1},{0,0},{0,1},
+                                 {0,0},{0,0},{0,3},{0,1},{0,1},
+                                 {2,1},{0,2},{2,1},{3,3},{0,1},
+                                 {0,1},{4,5},{1,0},{0,1},{2,1},
+                                 {3,0},{0,4},{2,0},{1,2},{3,5},
+                                 {3,1},{6,5},{5,2},{2,0},{0,2},
+                                 {1,0}};
+
     public int anmelden(String benutzername, String passwort, String ip, int port) {
         userList.toFirst();
         while (userList.hasAccess()) {
@@ -83,7 +94,7 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
     }
 
     /**
-     * Vermutlich für die User-Liste, sinnvoll, noch nicht umgesetzt... 
+     * Vermutlich für die User-Liste, sinnvoll, noch nicht umgesetzt...
      */
     public int save(String filePath) {
         return 0;
@@ -91,5 +102,51 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
 
     public int load(String filePath) {
         return 0;
+    }
+
+    public void werteSpiel(int spielNr) {
+        for (userList.toFirst(); userList.hasAccess(); userList.next()) {
+            User user = userList.getContent();
+            int[] tipp = user.getSpielTipps(spielNr - 1);
+
+            if (gameResults[spielNr - 1][0] == tipp[0]) {
+                user.setPunkte(user.getPunkte() + 1);
+            }
+            if (gameResults[spielNr - 1][1] == tipp[1]) {
+                user.setPunkte(user.getPunkte() + 1);
+            }
+            if (gameResults[spielNr - 1][0] == tipp[0] && gameResults[spielNr - 1][1] == tipp[1]) {
+                user.setPunkte(user.getPunkte() + 1);
+            }
+        }
+    }
+
+    public void werteSpieleBis(int SpielNr) {
+        for (userList.toFirst(); userList.hasAccess(); userList.next()) {
+            userList.getContent().setPunkte(0);
+        }
+        for (int i = 0; i < SpielNr; i++) {
+            werteSpiel(i);
+        }
+    }
+
+    public int getPlatz(int userID) {
+        int platz = 1;
+        int userPunkte = 0;
+        for (userList.toFirst(); userList.hasAccess(); userList.next()) {
+            if (userID == userList.getContent().getUserID()) {
+                userPunkte = userList.getContent().getPunkte();
+            }
+        }
+        for (userList.toFirst(); userList.hasAccess(); userList.next()) {
+            if (userList.getContent().getPunkte() > userPunkte) {
+                platz++;
+            }
+        }
+        return platz;
+    }
+
+    public int getPunkte(int userID) {
+        return userList.getContent().getPunkte();
     }
 }
