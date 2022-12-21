@@ -81,10 +81,28 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
             userList.next();
         }
     }
+    public int SMMT() {
+        int[] tippzahl = new int[51];
+        int maxtipps = 0;
+        userList.toFirst();
+        while (userList.hasAccess()) {
+            User u = userList.getContent();
+            for (int i = 0; i < 51; i++) {
+                if (u.getSpielTipps(i) != null) {
+                    tippzahl[i]++;
+                }
+            }
+            userList.next();    
+            for (int i = 1; i < 51; i++) {
+                if (tippzahl[i] > tippzahl[maxtipps]) {
+                    maxtipps = i;
+                }
+            }
+        }
+    return maxtipps;
+    }
 
-    /**
-     * Vermutlich für die User-Liste, sinnvoll, noch nicht umgesetzt... 
-     */
+
     public int save(String filePath) {
         return 0;
     }
