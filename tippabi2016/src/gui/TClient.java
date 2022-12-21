@@ -5,6 +5,8 @@
 package gui;
 
 import client.TippClient;
+import java.awt.Color;
+import javax.swing.text.DefaultCaret;
 
 /**
  *
@@ -131,6 +133,8 @@ private TippClient hatChatClient;
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
+        DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();
+caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         jScrollPane1.setViewportView(jTextArea1);
 
         jLabel2.setText("Ausgabefenster:");
@@ -287,16 +291,25 @@ private TippClient hatChatClient;
     }// </editor-fold>//GEN-END:initComponents
 
     private void anmeldenServer(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anmeldenServer
-        String lServerIP=jTextField4.getText();
-        if (lServerIP.length()>0) {
-           hatChatClient=new TippClient(lServerIP, jTextArea1);
-           jPanel1.setVisible(true);
-           pack();
+        try{
+            String lServerIP=jTextField4.getText();
+            if (lServerIP.length()>0) {
+               hatChatClient=new TippClient(lServerIP, jTextArea1);
+               jTextField4.setBackground(Color.green);
+               jPanel1.setVisible(true);
+               pack();
+            }
+        }catch(Exception e){
+            hatChatClient.close();
+            jTextField4.setBackground(Color.red);
+            jPanel1.setVisible(false);
+            pack();
         }
     }//GEN-LAST:event_anmeldenServer
 
     private void abmeldenServer(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abmeldenServer
         hatChatClient.close();
+        jTextField4.setBackground(Color.white);
         jPanel1.setVisible(false);
         pack();
     }//GEN-LAST:event_abmeldenServer

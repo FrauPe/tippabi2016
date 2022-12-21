@@ -239,6 +239,9 @@
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="DefaultCaret caret = (DefaultCaret)jTextArea1.getCaret();&#xd;caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
