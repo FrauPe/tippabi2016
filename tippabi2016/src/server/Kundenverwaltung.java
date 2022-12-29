@@ -107,8 +107,7 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
     public void werteSpiel(int spielNr) {
         for (userList.toFirst(); userList.hasAccess(); userList.next()) {
             User user = userList.getContent();
-            int[] tipp = user.getSpielTipps(spielNr - 1);
-
+            int[] tipp = user.getSpielTipps(spielNr);
             if (gameResults[spielNr - 1][0] == tipp[0]) {
                 user.setPunkte(user.getPunkte() + 1);
             }
@@ -119,13 +118,14 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
                 user.setPunkte(user.getPunkte() + 1);
             }
         }
+        
     }
 
     public void werteSpieleBis(int SpielNr) {
         for (userList.toFirst(); userList.hasAccess(); userList.next()) {
             userList.getContent().setPunkte(0);
         }
-        for (int i = 0; i < SpielNr; i++) {
+        for (int i = 1; i <= SpielNr; i++) {
             werteSpiel(i);
         }
     }

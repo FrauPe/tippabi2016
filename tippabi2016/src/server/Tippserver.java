@@ -11,6 +11,7 @@ public class Tippserver extends Server {
     Kundenverwaltung data;//Ersetzt teilnehmersammlung, gut!
     javax.swing.JTextArea output;//Vereinfacht Kommunikation mit GUI - siehe ChatClient-Anwendung, gut!
     String filePath;//Noch nicht genutzt...ok!
+    int letztesSpiel = 0;
 
     public Tippserver(javax.swing.JTextArea out, String pFilePath) {
         super(2000);
@@ -60,6 +61,10 @@ public class Tippserver extends Server {
                         reply = "-ERR Die Spiel Nr. " + command[1] + " ist ungültig.";
                         break;
                     }
+                    if(Integer.valueOf(command[1]) <= letztesSpiel) {
+                        reply = "-ERR Das Spiel " + command[1] + " wurde schon gespielt."; 
+                        break;
+                    }
                     data.setzeTipp(userID, Integer.valueOf(command[1]), Integer.valueOf(command[2]), Integer.valueOf(command[3]));
                     reply = "+OK Der Tipp auf Spiel Nr. " + command[1] + " wurde gesetzt.";
                     break;
@@ -102,7 +107,7 @@ public class Tippserver extends Server {
                         reply = "-ERR Du bist nicht angemeldet.";
                         break;
                     }
-                    reply = "+OK Du bist auf dem" + data.getPlatz(userID) + ". Platz.";
+                    reply = "+OK Du bist auf dem " + data.getPlatz(userID) + ". Platz.";
                     break;
                 default:
                     reply = "-ERR Befehl ungültig.";
@@ -129,6 +134,8 @@ public class Tippserver extends Server {
         return data.save(filePath);//macht noch nix - ok!
     }
 
-public void werteSpiele(int SpielNr)
-
+    public void werteSpieleBis(int SpielNr) {
+        data.werteSpieleBis(SpielNr);
+        letztesSpiel = SpielNr;
+    }
 }
