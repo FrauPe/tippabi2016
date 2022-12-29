@@ -31,10 +31,16 @@ public class TippserverGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         JButton_exit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea_output = new javax.swing.JTextArea();
+        jText_InputSpielNr = new javax.swing.JTextField();
+        jLabel_SetzeSpiel = new javax.swing.JLabel();
+        jLabel_SpielAnzeige = new javax.swing.JLabel();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,18 +56,35 @@ public class TippserverGUI extends javax.swing.JFrame {
         jTextArea_output.setRows(5);
         jScrollPane1.setViewportView(jTextArea_output);
 
+        jText_InputSpielNr.setText("SpielNr");
+        jText_InputSpielNr.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jText_InputSpielNrActionPerformed(evt);
+            }
+        });
+
+        jLabel_SetzeSpiel.setText("Setze Spiel:");
+
+        jLabel_SpielAnzeige.setText("Spiel: 0");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .addComponent(JButton_exit)
-                .addGap(164, 164, 164))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addComponent(JButton_exit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_SetzeSpiel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jText_InputSpielNr, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel_SpielAnzeige)
+                .addGap(26, 26, 26))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +92,11 @@ public class TippserverGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JButton_exit)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JButton_exit)
+                    .addComponent(jText_InputSpielNr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_SetzeSpiel)
+                    .addComponent(jLabel_SpielAnzeige))
                 .addContainerGap())
         );
 
@@ -90,6 +117,17 @@ public class TippserverGUI extends javax.swing.JFrame {
     private void JButton_exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButton_exitActionPerformed
         System.exit(server.shutdown());
     }//GEN-LAST:event_JButton_exitActionPerformed
+
+    private void jText_InputSpielNrActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jText_InputSpielNrActionPerformed
+        int SpielNr = 0;
+        try{
+        SpielNr = Integer.valueOf(jText_InputSpielNr.getText());
+        } catch (Exception e) {
+          return;
+        }
+        jLabel_SpielAnzeige.setText("Spiel: " + SpielNr);
+        server.werteSpieleBis(SpielNr);
+    }//GEN-LAST:event_jText_InputSpielNrActionPerformed
 
     /**
      * @param args the command line arguments
@@ -129,8 +167,12 @@ public class TippserverGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButton_exit;
+    private javax.swing.JLabel jLabel_SetzeSpiel;
+    private javax.swing.JLabel jLabel_SpielAnzeige;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea_output;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jText_InputSpielNr;
     // End of variables declaration//GEN-END:variables
 }
