@@ -75,7 +75,7 @@ public class User { // aka Teilnehmer
 
     public int[] getSpielTipps(int pSpiel) {
         pSpiel--;
-        if (pSpiel>=0 && pSpiel<=spieleTipps.length) return spieleTipps[pSpiel];
+        if (pSpiel>=0 && pSpiel<=spieleTipps.length) return spieleTipps[pSpiel];  
         int[] notipp={-1,-1};
         return notipp;
     }

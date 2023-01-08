@@ -158,17 +158,17 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
         while (userList.hasAccess()) {
             User u = userList.getContent();
             for (int i = 0; i < 51; i++) {
-                if (u.getSpielTipps(i) != null) {
+                if (u.getSpielTipps(i+1)[0] != -1) {//i+1, da Methode Spiele von 1 bis 51 erwartet...
                     tippzahl[i]++;
                 }
             }
             userList.next();    
-            for (int i = 1; i < 51; i++) {
-                if (tippzahl[i] > tippzahl[maxtipps]) {
-                    maxtipps = i;
-                }
+        }
+        for (int i = 1; i < 51; i++) {
+            if (tippzahl[i] > tippzahl[maxtipps]) {
+                maxtipps = i;
             }
         }
-    return maxtipps;
+        return maxtipps++;//maxtipps+1, da die Spiele von 1 bis 51 gezählt werden sollen
     }
 }

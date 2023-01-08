@@ -92,9 +92,9 @@ public class Tippserver extends Server {
                     }
                     reply = "+OK Dein Tipp für Spiel " + command[1] + ": " + tipp[0] + ":" + tipp[1];
                     break;
-//                case "SMMT":
-//                    reply = "+OK Die Meisten Tipps wurden für Spiel " + data.getSMMT() + " abgegeben.";
-//                    break;  
+                case "SMMT":
+                    reply = "+OK Die Meisten Tipps wurden für Spiel " + data.SMMT() + " abgegeben.";
+                    break;  
                 case "PUNKTE":
                     if (userID == -1) {
                         reply = "-ERR Du bist nicht angemeldet.";
