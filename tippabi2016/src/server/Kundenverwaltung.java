@@ -4,7 +4,8 @@ import abiturklassen.listenklassen.List;
 
 /**
  *
- * @author q2.02Schaaf Kommentare FrauPe
+ * @author q2.02Schaaf 
+ * Kommentare FrauPe
  */
 public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverklasse, gefällt mir so besser!
 
@@ -148,5 +149,26 @@ public class Kundenverwaltung {//aka - wäre im Abiturvorschlag Teil der Serverk
 
     public int getPunkte(int userID) {
         return userList.getContent().getPunkte();
+    }
+    
+    public int SMMT() {
+        int[] tippzahl = new int[51];
+        int maxtipps = 0;
+        userList.toFirst();
+        while (userList.hasAccess()) {
+            User u = userList.getContent();
+            for (int i = 0; i < 51; i++) {
+                if (u.getSpielTipps(i) != null) {
+                    tippzahl[i]++;
+                }
+            }
+            userList.next();    
+            for (int i = 1; i < 51; i++) {
+                if (tippzahl[i] > tippzahl[maxtipps]) {
+                    maxtipps = i;
+                }
+            }
+        }
+    return maxtipps;
     }
 }
