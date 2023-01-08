@@ -8,6 +8,7 @@ import abiturklassen.listenklassen.List;
  */
 public class User { // aka Teilnehmer
 
+    int punkte;
     String benutzername;
     String passwort;
     static int nextUserID = 0;
@@ -25,6 +26,7 @@ public class User { // aka Teilnehmer
             spieleTipps[i][0] = -1;
             spieleTipps[i][1] = -1;
         }
+        punkte = 0;
     }
 
     public String getBenutzername() {
@@ -83,4 +85,13 @@ public class User { // aka Teilnehmer
         spieleTipps[spielID][0] = tor1;
         spieleTipps[spielID][1] = tor2;
     }
+
+    public int getPunkte() {
+        return punkte;
+    }
+
+    public void setPunkte(int punkte) {
+        this.punkte = punkte;
+    }
+
 }

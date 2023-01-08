@@ -11,6 +11,7 @@ public class Tippserver extends Server {
     Kundenverwaltung data;//Ersetzt teilnehmersammlung, gut!
     javax.swing.JTextArea output;//Vereinfacht Kommunikation mit GUI - siehe ChatClient-Anwendung, gut!
     String filePath;//Noch nicht genutzt...ok!
+    int letztesSpiel = 0;
 
     public Tippserver(javax.swing.JTextArea out, String pFilePath) {
         super(2000);
@@ -53,11 +54,15 @@ public class Tippserver extends Server {
                     break;
                 case "TIPP":
                     if (userID == -1) {
-                        reply = "-ERR Du bist nicht angemeldet";
+                        reply = "-ERR Du bist nicht angemeldet.";
                         break;
                     }
-                    if (Integer.valueOf(command[1]) > 51 && Integer.valueOf(command[1]) <= 0) {
+                    if (Integer.valueOf(command[1]) > 51 || Integer.valueOf(command[1]) <= 0) {
                         reply = "-ERR Die Spiel Nr. " + command[1] + " ist ungültig.";
+                        break;
+                    }
+                    if(Integer.valueOf(command[1]) <= letztesSpiel) {
+                        reply = "-ERR Das Spiel " + command[1] + " wurde schon gespielt."; 
                         break;
                     }
                     data.setzeTipp(userID, Integer.valueOf(command[1]), Integer.valueOf(command[2]), Integer.valueOf(command[3]));
@@ -65,7 +70,7 @@ public class Tippserver extends Server {
                     break;
                 case "ABMELDEN":
                     if (userID == -1) {
-                        reply = "-ERR Du bist nicht angemeldet";
+                        reply = "-ERR Du bist nicht angemeldet.";
                         break;
                     }
                     data.abmelden(userID);
@@ -73,7 +78,7 @@ public class Tippserver extends Server {
                     break;
                 case "SPIEL":
                     if (userID == -1) {
-                        reply = "-ERR Du bist nicht angemeldet";
+                        reply = "-ERR Du bist nicht angemeldet.";
                         break;
                     }
                     if (Integer.valueOf(command[1]) > 51 || Integer.valueOf(command[1]) <= 0) {
@@ -87,10 +92,23 @@ public class Tippserver extends Server {
                     }
                     reply = "+OK Dein Tipp für Spiel " + command[1] + ": " + tipp[0] + ":" + tipp[1];
                     break;
-                case "SMMT":
-                    reply = "+OK Dieser Befehl wird bald unterstützt.";
-                    //Do real stuff here.
-                    break;    
+//                case "SMMT":
+//                    reply = "+OK Die Meisten Tipps wurden für Spiel " + data.getSMMT() + " abgegeben.";
+//                    break;  
+                case "PUNKTE":
+                    if (userID == -1) {
+                        reply = "-ERR Du bist nicht angemeldet.";
+                        break;
+                    }
+                    reply = "+OK Du hast " + data.getPunkte(userID) + " Punkte erzielt.";
+                    break;
+                case "PLATZ":
+                    if (userID == -1) {
+                        reply = "-ERR Du bist nicht angemeldet.";
+                        break;
+                    }
+                    reply = "+OK Du bist auf dem " + data.getPlatz(userID) + ". Platz.";
+                    break;
                 default:
                     reply = "-ERR Befehl ungültig.";
                     break;
@@ -116,4 +134,8 @@ public class Tippserver extends Server {
         return data.save(filePath);//macht noch nix - ok!
     }
 
+    public void werteSpieleBis(int SpielNr) {
+        data.werteSpieleBis(SpielNr);
+        letztesSpiel = SpielNr;
+    }
 }
